@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:hydroinformatics_data_management_system/custom/bottom_navigation.dart';
+import 'package:hydroinformatics_data_management_system/pages/data_selection_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/ground_water_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/login_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/registration_approval_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/services_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/splash_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
+import 'package:hydroinformatics_data_management_system/providers/login_provider.dart';
+import 'package:hydroinformatics_data_management_system/providers/station_info_provider.dart';
+import 'package:provider/provider.dart';
+
+void main() {
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => LoginProvider()),
+    ChangeNotifierProvider(create: (context) => StationInfoProvider()),
+  ], child: const MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'HDMS',
+      theme: ThemeData(),
+      initialRoute: SplashPage.splashPage,
+      builder: EasyLoading.init(),
+      routes: {
+        LoginPage.loginPage: (context) => LoginPage(),
+        BottomNavigationPage.bottomNavigationPage: (context) =>
+            BottomNavigationPage(),
+        ServicesPage.servicesPage: (context) => ServicesPage(),
+        DataSelectionPage.dataSelectionPage: (create) => DataSelectionPage(),
+        SurfaceWaterPage.surfaceWaterPage: (create) => SurfaceWaterPage(),
+        RainfallPage.rainfallPage: (create) => RainfallPage(),
+        GroundWaterPage.groundWaterPage: (create) => GroundWaterPage(),
+        RegistrationApprovalPage.registrationApprovalPage: (create) =>
+            RegistrationApprovalPage(),
+        SplashPage.splashPage: (create) => SplashPage(),
+      },
+    );
+  }
+}
