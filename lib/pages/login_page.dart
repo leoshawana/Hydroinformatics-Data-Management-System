@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
         body: Center(
           child: Container(
             padding:
-                const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 20),
+                const EdgeInsets.only(left: 20, right: 20, bottom: 15, top: 15),
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Text('Welcome to HDMS', style: GoogleFonts.poppins(
+                      child: Text('Welcome to eHIMS', style: GoogleFonts.poppins(
                           fontSize: 25,
                           fontWeight: FontWeight.w500,
                           color: Colors.white),),
