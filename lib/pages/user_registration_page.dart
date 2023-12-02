@@ -213,9 +213,15 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                       if (value != null) {
                                                         if (value['status'] ==
                                                             'success') {
-                                                          Fluttertoast.showToast(
-                                                              msg: value[
-                                                                  'message']);
+                                                          Fluttertoast
+                                                              .showToast(
+                                                            msg: value[
+                                                                'message'],
+                                                            backgroundColor:
+                                                                Colors.red,
+                                                            textColor:
+                                                                Colors.white,
+                                                          );
 
                                                           userRegistrationProvider
                                                               .getRegistrationInfo(
@@ -274,9 +280,15 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                       if (value != null) {
                                                         if (value['status'] ==
                                                             'success') {
-                                                          Fluttertoast.showToast(
-                                                              msg: value[
-                                                                  'message']);
+                                                          Fluttertoast
+                                                              .showToast(
+                                                            msg: value[
+                                                                'message'],
+                                                            backgroundColor:
+                                                                Colors.red,
+                                                            textColor:
+                                                                Colors.white,
+                                                          );
 
                                                           userRegistrationProvider
                                                               .getRegistrationInfo(
