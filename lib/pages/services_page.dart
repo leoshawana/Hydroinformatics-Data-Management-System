@@ -6,6 +6,7 @@ import 'package:hydroinformatics_data_management_system/pages/data_selection_pag
 import 'package:hydroinformatics_data_management_system/pages/ground_water_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/user_registration_page.dart';
 import 'package:hydroinformatics_data_management_system/providers/login_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/station_info_provider.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,6 @@ class _ServicesPageState extends State<ServicesPage> {
     stationInfoProvider = Provider.of(context, listen: true);
     loginProvider.getServiceInfo();
     super.didChangeDependencies();
-
   }
 
   @override
@@ -70,33 +70,54 @@ class _ServicesPageState extends State<ServicesPage> {
                           if (loginProvider.serviceInfo[index].data! == "WL") {
                             stationInfoProvider
                                 .getStationInfo(
-                                    loginProvider.serviceInfo[index].data!, context)
+                                    loginProvider.serviceInfo[index].data!,
+                                    context)
                                 .then((value) {
                               EasyLoading.dismiss();
-                              Navigator.of(context)
-                                  .pushNamed(DataSelectionPage.dataSelectionPage, arguments: loginProvider.serviceInfo[index].data!);
+                              Navigator.of(context).pushNamed(
+                                  DataSelectionPage.dataSelectionPage,
+                                  arguments:
+                                      loginProvider.serviceInfo[index].data!);
                             });
                           }
 
                           if (loginProvider.serviceInfo[index].data! == "RF") {
                             stationInfoProvider
                                 .getStationInfo(
-                                    loginProvider.serviceInfo[index].data!, context)
+                                    loginProvider.serviceInfo[index].data!,
+                                    context)
                                 .then((value) {
                               EasyLoading.dismiss();
-                              Navigator.of(context)
-                                  .pushNamed(DataSelectionPage.dataSelectionPage, arguments: loginProvider.serviceInfo[index].data!);
+                              Navigator.of(context).pushNamed(
+                                  DataSelectionPage.dataSelectionPage,
+                                  arguments:
+                                      loginProvider.serviceInfo[index].data!);
                             });
                           }
 
                           if (loginProvider.serviceInfo[index].data! == "GW") {
                             stationInfoProvider
                                 .getStationInfo(
-                                    loginProvider.serviceInfo[index].data!, context)
+                                    loginProvider.serviceInfo[index].data!,
+                                    context)
                                 .then((value) {
                               EasyLoading.dismiss();
-                              Navigator.of(context)
-                                  .pushNamed(DataSelectionPage.dataSelectionPage, arguments: loginProvider.serviceInfo[index].data!);
+                              Navigator.of(context).pushNamed(
+                                  DataSelectionPage.dataSelectionPage,
+                                  arguments:
+                                      loginProvider.serviceInfo[index].data!);
+                            });
+                          }
+
+                          if (loginProvider.serviceInfo[index].data! == "UR") {
+                            stationInfoProvider
+                                .getStationInfo(
+                                    loginProvider.serviceInfo[index].data!,
+                                    context)
+                                .then((value) {
+                              EasyLoading.dismiss();
+                              Navigator.of(context).pushNamed(
+                                  UserRegistrationPage.userRegistrationPage);
                             });
                           }
                         },

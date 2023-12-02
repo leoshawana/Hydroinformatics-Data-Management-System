@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hydroinformatics_data_management_system/pages/ground_water_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/hydro_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
 
@@ -48,7 +49,7 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                 style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                    color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -64,18 +65,18 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                   child: InkWell(
                     onTap: () {
                       if (serviceInfo == 'WL') {
-                        Navigator.of(context).pushNamed(
-                            SurfaceWaterPage.surfaceWaterPage);
+                        Navigator.of(context)
+                            .pushNamed(SurfaceWaterPage.surfaceWaterPage);
                       }
 
                       if (serviceInfo == 'RF') {
-                        Navigator.of(context).pushNamed(
-                            RainfallPage.rainfallPage);
+                        Navigator.of(context)
+                            .pushNamed(RainfallPage.rainfallPage);
                       }
 
                       if (serviceInfo == 'GW') {
-                        Navigator.of(context).pushNamed(
-                            GroundWaterPage.groundWaterPage);
+                        Navigator.of(context)
+                            .pushNamed(GroundWaterPage.groundWaterPage);
                       }
                     },
                     child: Column(
@@ -103,23 +104,29 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Column(
-                    children: [
-                      Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset('images/data_list.png'),
-                          )),
-                      const SizedBox(
-                        height: 3,
-                      ),
-                      Text('Data List',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontSize: 14, fontWeight: FontWeight.w400))
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(HydroGraphPage.hydroGraphPage);
+                    },
+                    child: Column(
+                      children: [
+                        Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset('images/data_list.png'),
+                            )),
+                        const SizedBox(
+                          height: 3,
+                        ),
+                        Text('Data List',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w400))
+                      ],
+                    ),
                   ),
                 ),
               ],

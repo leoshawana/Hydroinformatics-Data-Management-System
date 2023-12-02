@@ -282,7 +282,7 @@ class _RainfallPageState extends State<RainfallPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{2}\.\d{1,3}$');
+                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
 
                               if (value == null || value.isEmpty) {
                                 return 'Please provide a value';

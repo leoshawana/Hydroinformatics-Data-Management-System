@@ -115,7 +115,6 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                                 selectedStation = value.toString();
                                 selectedKeyword = stationInfoProvider
                                     .getStationKeyword(selectedStation);
-
                                 dynamic info = await FetchStationDataService
                                     .fetchHydroData(selectedKeyword, datePickerController.text);
 
@@ -285,7 +284,7 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{2}\.\d{1,3}$');
+                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
 
                               if (value == null || value.isEmpty) {
                                 return 'Please provide a value';

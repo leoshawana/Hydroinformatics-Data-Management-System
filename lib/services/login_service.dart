@@ -24,7 +24,7 @@ class LoginService {
         return data;
       }
     } catch (e) {
-      return data;
+      return data; 
     }
   }
 }

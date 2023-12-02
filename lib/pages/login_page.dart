@@ -88,9 +88,6 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return 'Please provide your user name';
                         }
-                        if (!(value.contains('@'))) {
-                          return 'User name should contain @';
-                        }
                       },
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(

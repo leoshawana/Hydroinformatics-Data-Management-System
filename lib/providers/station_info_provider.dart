@@ -75,7 +75,6 @@ class StationInfoProvider extends ChangeNotifier {
               });
         }
       }
-
     } else {
       print('Something went wrong');
     }
