@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hydroinformatics_data_management_system/custom/bottom_navigation.dart';
+import 'package:hydroinformatics_data_management_system/pages/data_request_details_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/data_request_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_selection_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/ground_water_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/hydro_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/login_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
-import 'package:hydroinformatics_data_management_system/pages/registration_approval_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/services_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/splash_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
@@ -50,12 +51,13 @@ class MyApp extends StatelessWidget {
         SurfaceWaterPage.surfaceWaterPage: (create) => SurfaceWaterPage(),
         RainfallPage.rainfallPage: (create) => RainfallPage(),
         GroundWaterPage.groundWaterPage: (create) => GroundWaterPage(),
-        RegistrationApprovalPage.registrationApprovalPage: (create) =>
-            RegistrationApprovalPage(),
         SplashPage.splashPage: (create) => SplashPage(),
         HydroGraphPage.hydroGraphPage: (create) => HydroGraphPage(),
         UserRegistrationPage.userRegistrationPage: (create) =>
             UserRegistrationPage(),
+        DataRequestPage.dataRequestPage: (create) => DataRequestPage(),
+        DataRequestDetailsPage.dataRequestDetailsPage: (create) =>
+            DataRequestDetailsPage(),
       },
     );
   }

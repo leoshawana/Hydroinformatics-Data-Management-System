@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hydroinformatics_data_management_system/custom/drawer.dart';
+import 'package:hydroinformatics_data_management_system/pages/data_request_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_selection_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/user_registration_page.dart';
 import 'package:hydroinformatics_data_management_system/providers/login_provider.dart';
@@ -105,6 +106,17 @@ class _ServicesPageState extends State<ServicesPage> {
                           EasyLoading.dismiss();
                           Navigator.of(context).pushNamed(
                               UserRegistrationPage.userRegistrationPage);
+                        });
+                      }
+
+                      if (loginProvider.serviceInfo[index].data! == "DR") {
+                        stationInfoProvider
+                            .getStationInfo(
+                                loginProvider.serviceInfo[index].data!, context)
+                            .then((value) {
+                          EasyLoading.dismiss();
+                          Navigator.of(context)
+                              .pushNamed(DataRequestPage.dataRequestPage);
                         });
                       }
                     },
