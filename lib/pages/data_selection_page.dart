@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hydroinformatics_data_management_system/pages/ground_water_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/hydro_graph_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/rainfall_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
 
@@ -20,7 +21,6 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
   @override
   void didChangeDependencies() {
     serviceInfo = ModalRoute.of(context)!.settings.arguments as String;
-    print(serviceInfo);
 
     super.didChangeDependencies();
   }
@@ -106,8 +106,15 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                   flex: 1,
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(HydroGraphPage.hydroGraphPage);
+                      if (serviceInfo == 'GW') {
+                        Navigator.of(context)
+                            .pushNamed(HydroGraphPage.hydroGraphPage);
+                      }
+
+                      if (serviceInfo == 'RF') {
+                        Navigator.of(context)
+                            .pushNamed(RainfallGraphPage.rainfallGraphPage);
+                      }
                     },
                     child: Column(
                       children: [

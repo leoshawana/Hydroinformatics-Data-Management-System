@@ -1,24 +1,24 @@
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hydroinformatics_data_management_system/models/hydro_graph_model.dart';
-import 'package:hydroinformatics_data_management_system/providers/graph_provider.dart';
-import 'package:hydroinformatics_data_management_system/providers/station_info_provider.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import "package:dropdown_search/dropdown_search.dart";
+import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
+import "package:intl/intl.dart";
+import "package:provider/provider.dart";
+import "package:syncfusion_flutter_charts/charts.dart";
 
-class HydroGraphPage extends StatefulWidget {
-  const HydroGraphPage({super.key});
+import "../models/rainfall_graph_model.dart";
+import "../providers/graph_provider.dart";
+import "../providers/station_info_provider.dart";
 
-  static const String hydroGraphPage = 'hydroGraphPage';
+class RainfallGraphPage extends StatefulWidget {
+  const RainfallGraphPage({super.key});
+
+  static const rainfallGraphPage = "rainfallGraphPage";
 
   @override
-  State<HydroGraphPage> createState() => _HydroGraphPageState();
+  State<RainfallGraphPage> createState() => _RainfallGraphPageState();
 }
 
-class _HydroGraphPageState extends State<HydroGraphPage> {
+class _RainfallGraphPageState extends State<RainfallGraphPage> {
   late StationInfoProvider stationInfoProvider;
   bool callOnce = false;
   dynamic selectedStation;
@@ -46,12 +46,12 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        centerTitle: true,
         title: Text(
-          'Ground Water Graph',
+          'Rainfall Graph Page',
           style: GoogleFonts.poppins(
               fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
         ),
+        centerTitle: true,
       ),
       body: Container(
         margin: EdgeInsets.all(15),
@@ -61,7 +61,7 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
             child: Column(
               children: [
                 Text(
-                  'Well ID',
+                  'Station Name',
                   style: GoogleFonts.poppins(
                       fontSize: 15, fontWeight: FontWeight.w500),
                 ),
@@ -189,7 +189,7 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                                   String formattedDate =
                                       DateFormat('dd-MM-yyyy')
                                           .format(pickedDate);
-                                  print('to date ${formattedDate}');
+                                  print('to date: ${formattedDate}');
                                   setState(() {
                                     toDateController.text = formattedDate;
                                   });
@@ -223,17 +223,19 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         graphProvider
-                            .showHydroGraph(
+                            .showRainfallGraph(
                                 selectedKeyword,
                                 fromDateController.text,
                                 toDateController.text,
+                                "RF",
                                 context)
                             .then((value) {
-                          graphProvider.hydroDataList.forEach((element) {
-                            print(element.logDate);
+                          graphProvider.rainfallDataList.forEach((element) {
+                            print('element.rainfall: ${element.rainfall}');
+                            print('keyword: ${selectedKeyword}');
                           });
 
-                          if (graphProvider.hydroDataList.isNotEmpty) {
+                          if (graphProvider.rainfallDataList.isNotEmpty) {
                             showDialog<String>(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
@@ -244,7 +246,7 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                                             MediaQuery.of(context).size.width,
                                         child: Column(
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 40,
                                             ),
                                             SfCartesianChart(
@@ -253,19 +255,19 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                                                         text: 'Date')),
                                                 primaryYAxis: NumericAxis(
                                                     title: AxisTitle(
-                                                        text: 'WL(m)')),
+                                                        text: 'WL(mm)')),
                                                 series: <ChartSeries>[
                                                   // Renders line chart
-                                                  LineSeries<Data, String>(
+                                                  BarSeries<RfData, String>(
                                                       dataSource: graphProvider
-                                                          .hydroDataList,
+                                                          .rainfallDataList,
                                                       xValueMapper:
-                                                          (Data data, _) =>
+                                                          (RfData data, _) =>
                                                               data.logDate,
-                                                      yValueMapper: (Data data,
-                                                              _) =>
-                                                          num.parse(
-                                                              data.waterLvl!))
+                                                      yValueMapper:
+                                                          (RfData data, _) =>
+                                                              num.parse(data
+                                                                  .rainfall!))
                                                 ]),
                                             const SizedBox(
                                               height: 10,
@@ -279,7 +281,7 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                                         ),
                                       ),
                                     ));
-                          } else if (graphProvider.hydroDataList.isEmpty) {
+                          } else if (graphProvider.rainfallDataList.isEmpty) {
                             var snackBar = const SnackBar(
                                 content: Text(
                                     'Your selected date range has no data'));

@@ -7,6 +7,7 @@ import 'package:hydroinformatics_data_management_system/pages/data_selection_pag
 import 'package:hydroinformatics_data_management_system/pages/ground_water_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/hydro_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/login_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/rainfall_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/services_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/splash_page.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         DataRequestPage.dataRequestPage: (create) => DataRequestPage(),
         DataRequestDetailsPage.dataRequestDetailsPage: (create) =>
             DataRequestDetailsPage(),
+        RainfallGraphPage.rainfallGraphPage: (create) => RainfallGraphPage(),
       },
     );
   }

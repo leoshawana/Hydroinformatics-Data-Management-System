@@ -1,20 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:hydroinformatics_data_management_system/models/hydro_graph_model.dart';
+import 'package:hydroinformatics_data_management_system/models/rainfall_graph_model.dart';
 
 import '../services/graph_service.dart';
 
 class GraphProvider extends ChangeNotifier {
   HydroGraphModel? hydroGraphModel;
-  List<Data> dataList = [];
+  List<Data> hydroDataList = [];
+  RainfallGraphModel? rainfallGraphModel;
+  List<RfData> rainfallDataList = [];
 
   Future<void> showHydroGraph(keyword, fromDate, toDate, context) async {
     await GraphService.hydroGraphInfo(keyword, fromDate, toDate).then((value) {
-      dataList.clear();
+      hydroDataList.clear();
       if (value != null) {
         if (value['status'] == 'success') {
           hydroGraphModel = HydroGraphModel.fromJson(value);
           hydroGraphModel!.data!.forEach((element) {
-            dataList.add(element);
+            hydroDataList.add(element);
+          });
+          notifyListeners();
+        } else {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: Text(value['status']),
+              content: Text(value['message']),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        }
+      } else {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            content: const Text('Oops! Something went wrong'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    });
+  }
+
+  Future<void> showRainfallGraph(
+      keyword, fromDate, toDate, type, context) async {
+    await GraphService.rainfallGraphInfo(keyword, fromDate, toDate, type)
+        .then((value) {
+      rainfallDataList.clear();
+      if (value != null) {
+        if (value['status'] == 'success') {
+          rainfallGraphModel = RainfallGraphModel.fromJson(value);
+          rainfallGraphModel!.rFData!.forEach((element) {
+            rainfallDataList.add(element);
           });
           notifyListeners();
         } else {
