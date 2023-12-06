@@ -244,7 +244,7 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                                             MediaQuery.of(context).size.width,
                                         child: Column(
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 40,
                                             ),
                                             SfCartesianChart(

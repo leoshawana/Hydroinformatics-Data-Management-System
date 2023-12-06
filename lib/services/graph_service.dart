@@ -28,7 +28,7 @@ class GraphService {
     }
   }
 
-  static Future<dynamic> rainfallGraphInfo(
+  static Future<dynamic> ffwcGraphInfo(
       keyword, fromDate, toDate, type) async {
     dynamic data;
     try {

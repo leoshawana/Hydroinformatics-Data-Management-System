@@ -4,6 +4,7 @@ import 'package:hydroinformatics_data_management_system/pages/ground_water_page.
 import 'package:hydroinformatics_data_management_system/pages/hydro_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/rainfall_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/surface_water_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
 
 class DataSelectionPage extends StatefulWidget {
@@ -114,6 +115,11 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                       if (serviceInfo == 'RF') {
                         Navigator.of(context)
                             .pushNamed(RainfallGraphPage.rainfallGraphPage);
+                      }
+
+                      if (serviceInfo == 'WL') {
+                        Navigator.of(context).pushNamed(
+                            SurfaceWaterGraphPage.surfaceWaterGraphPage);
                       }
                     },
                     child: Column(
