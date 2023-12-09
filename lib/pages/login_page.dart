@@ -52,12 +52,17 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Text('Welcome to eHIMS', style: GoogleFonts.poppins(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),),
+                      child: Text(
+                        'Welcome to eHIMS',
+                        style: GoogleFonts.poppins(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
                     Align(
                       alignment: Alignment.center,
                       child: Image.asset(
@@ -70,8 +75,11 @@ class _LoginPageState extends State<LoginPage> {
                       height: 30,
                     ),
                     Center(
-                      child: Text('Login', style: GoogleFonts.poppins(
-                          fontSize: 25, fontWeight: FontWeight.w500, color: Colors.white)),
+                      child: Text('Login',
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white)),
                     ),
                     const SizedBox(
                       height: 15,
@@ -209,7 +217,11 @@ class _LoginPageState extends State<LoginPage> {
                                 if (value['status'] == 'success') {
                                   HelperMethod.setUserId(
                                       value['user_id'].toString());
-                                  HelperMethod.setAuthToken(value['authorization']['token']);
+
+                                  HelperMethod.setUserName(value["name"]);
+
+                                  HelperMethod.setAuthToken(
+                                      value['authorization']['token']);
                                   ArtSweetAlert.show(
                                       context: context,
                                       artDialogArgs: ArtDialogArgs(
