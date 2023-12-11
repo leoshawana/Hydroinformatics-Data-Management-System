@@ -15,8 +15,8 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         backgroundColor: Colors.blue,
         title: Text(
@@ -116,6 +116,9 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
                                           context: context,
                                           builder: (BuildContext context) =>
                                               AlertDialog(
+                                            contentPadding: EdgeInsets.zero,
+                                            insetPadding:
+                                                const EdgeInsets.all(10),
                                             backgroundColor: Colors.blue,
                                             title: Center(
                                               child: Text('More Details',
@@ -125,107 +128,144 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
                                                           FontWeight.w500,
                                                       color: Colors.white)),
                                             ),
-                                            content: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Data Type: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('Frequency: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('Duration: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('Date Range: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('River: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('Upazila: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text('District: ${""}',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.white)),
-                                                const SizedBox(
-                                                  height: 50,
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Center(
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.all(15),
-                                                      width: 120,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          color: Colors.white),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Text('Back',
-                                                            style: GoogleFonts
-                                                                .poppins(
+                                            content: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  2,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text('Data Type: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text('Frequency: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text('Duration: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text('Date Range: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text('River: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text('Upazila: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text('District: ${""}',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .white)),
+                                                    const SizedBox(
+                                                      height: 50,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Center(
+                                                        child: Container(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  15),
+                                                          width: 120,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              color:
+                                                                  Colors.white),
+                                                          child: Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text('Back',
+                                                                style: GoogleFonts.poppins(
                                                                     fontSize:
                                                                         14,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w400,
+                                                                            .w500,
                                                                     color: Colors
                                                                         .black)),
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         );

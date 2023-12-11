@@ -16,8 +16,8 @@ class _DataRequestPageState extends State<DataRequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         backgroundColor: Colors.blue,
         title: Text(
@@ -43,10 +43,12 @@ class _DataRequestPageState extends State<DataRequestPage> {
                               DataRequestDetailsPage.dataRequestDetailsPage);
                         },
                         child: Card(
-                            color: Colors.blue,
+                            color: Colors.lightBlue.withOpacity(.5),
                             elevation: 5,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                                borderRadius: BorderRadius.circular(10),
+                                side:
+                                    const BorderSide(color: Colors.blueAccent)),
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Column(
