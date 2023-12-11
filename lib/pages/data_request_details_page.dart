@@ -15,6 +15,9 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Data Request Details Page',
@@ -325,7 +328,7 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
                               style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.black)),
+                                  color: Colors.white)),
                         ),
                       ),
                     ),
@@ -343,7 +346,7 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
                               style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.black)),
+                                  color: Colors.white)),
                         ),
                       ),
                     ),

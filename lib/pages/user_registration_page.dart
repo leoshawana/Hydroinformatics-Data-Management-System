@@ -41,6 +41,9 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text(
@@ -218,7 +221,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                             msg: value[
                                                                 'message'],
                                                             backgroundColor:
-                                                                Colors.red,
+                                                                Colors.black,
                                                             textColor:
                                                                 Colors.white,
                                                           );
@@ -229,6 +232,9 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                               .then((value) {
                                                             userRegistrationProvider
                                                                 .getPendingRegistrationInfo();
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
                                                           });
                                                         }
                                                       } else {
@@ -258,7 +264,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                   child: Text('Approve',
                                                       style:
                                                           GoogleFonts.poppins(
-                                                              fontSize: 12,
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w400,
@@ -285,7 +291,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                             msg: value[
                                                                 'message'],
                                                             backgroundColor:
-                                                                Colors.red,
+                                                                Colors.black,
                                                             textColor:
                                                                 Colors.white,
                                                           );
@@ -296,6 +302,9 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                               .then((value) {
                                                             userRegistrationProvider
                                                                 .getPendingRegistrationInfo();
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
                                                           });
                                                         }
                                                       } else {
@@ -325,23 +334,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                                                   child: Text('Reject',
                                                       style:
                                                           GoogleFonts.poppins(
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color: Colors
-                                                                  .white)),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text('Back',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              fontSize: 12,
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w400,
@@ -360,10 +353,11 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
                             });
                           },
                           child: Card(
-                              color: Colors.blue,
+                              color: Colors.lightBlue.withOpacity(.5),
                               elevation: 5,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(color: Colors.blueAccent)),
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: Column(

@@ -52,7 +52,10 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
     }
 
     super.didChangeDependencies();
-    nineAmController.text = stationInfoProvider.getHydroDataModel.value?? '';
+
+    String value =
+        checkIntorDouble(stationInfoProvider.getHydroDataModel.value ?? '');
+    nineAmController.text = value;
   }
 
   @override
@@ -60,6 +63,9 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
     print('selectedKeyword: ${selectedKeyword}');
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Ground Water',
@@ -116,14 +122,17 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                                 selectedKeyword = stationInfoProvider
                                     .getStationKeyword(selectedStation);
                                 dynamic info = await FetchStationDataService
-                                    .fetchHydroData(selectedKeyword, datePickerController.text);
+                                    .fetchHydroData(selectedKeyword,
+                                        datePickerController.text);
 
                                 if (info != null) {
                                   GetHydroDataModel getHydroDataModel =
                                       GetHydroDataModel.fromJson(info);
-                                  print(getHydroDataModel.value!);
-                                  nineAmController.text =
-                                      getHydroDataModel.value!;
+
+                                  String value = checkIntorDouble(
+                                      getHydroDataModel.value ?? '');
+
+                                  nineAmController.text = value;
                                 } else {
                                   showDialog(
                                       context: context,
@@ -185,21 +194,25 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                                         datePickerController.text =
                                             formattedDate;
 
-                                        dynamic info = await FetchStationDataService
-                                            .fetchHydroData(selectedKeyword, datePickerController.text);
+                                        dynamic info =
+                                            await FetchStationDataService
+                                                .fetchHydroData(selectedKeyword,
+                                                    datePickerController.text);
 
                                         if (info != null) {
                                           GetHydroDataModel getHydroDataModel =
-                                          GetHydroDataModel.fromJson(info);
-                                          print(getHydroDataModel.value!);
-                                          nineAmController.text =
-                                          getHydroDataModel.value!;
+                                              GetHydroDataModel.fromJson(info);
+                                          String value = checkIntorDouble(
+                                              getHydroDataModel.value ?? '');
+
+                                          nineAmController.text = value;
                                         } else {
                                           showDialog(
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  title: Text('Something went wrong'),
+                                                  title: Text(
+                                                      'Something went wrong'),
                                                   actions: [
                                                     TextButton(
                                                         onPressed: () {
@@ -284,13 +297,15 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (value == null || value.isEmpty) {
                                 return 'Please provide a value';
                               }
 
-                              if (!(pattern.hasMatch(value))) {
+                              if (!((pattern1.hasMatch(value)) ||
+                                  (pattern2.hasMatch(value)))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -370,12 +385,26 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                     child: Text(
                       'Submit',
                       style: GoogleFonts.poppins(
-                          fontSize: 15, fontWeight: FontWeight.w500),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ))
               ],
             ),
           )),
     );
+  }
+
+  String checkIntorDouble(String value) {
+    if (value.contains(".")) {
+      return value;
+    } else if (value == "") {
+      return "";
+    } else {
+      double convertedValue = double.parse(value);
+      String desiredValue = convertedValue.toStringAsFixed(1);
+      return desiredValue;
+    }
   }
 
   DateTime selectedDate() {

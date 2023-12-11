@@ -45,6 +45,9 @@ class _SurfaceWaterGraphPageState extends State<SurfaceWaterGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Surface Water Graph Page',
@@ -311,7 +314,7 @@ class _SurfaceWaterGraphPageState extends State<SurfaceWaterGraphPage> {
                                                     Container(
                                                       width: 20,
                                                       height: 10,
-                                                      color: Colors.red,
+                                                      color: Colors.cyan,
                                                     ),
                                                     const SizedBox(
                                                       height: 5,
@@ -456,7 +459,7 @@ class _SurfaceWaterGraphPageState extends State<SurfaceWaterGraphPage> {
                                                         }
                                                       },
                                                       name: 'hr18',
-                                                      color: Colors.red),
+                                                      color: Colors.cyan),
                                                 ]),
                                             const SizedBox(
                                               height: 10,

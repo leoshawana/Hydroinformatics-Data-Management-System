@@ -53,13 +53,17 @@ class _RainfallPageState extends State<RainfallPage> {
 
     super.didChangeDependencies();
 
-    sixAmController.text = stationInfoProvider.getFfwcDataModel.rainfall ?? '';
+    String value = checkIntorDouble(stationInfoProvider.getFfwcDataModel.rainfall ?? '');
+    sixAmController.text = value;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Rain Fall',
@@ -124,8 +128,10 @@ class _RainfallPageState extends State<RainfallPage> {
                                 if (info != null) {
                                   getFfwcDataModel =
                                       GetFfwcDataModel.fromJson(info);
-                                  sixAmController.text =
-                                      getFfwcDataModel!.rainfall ?? '';
+
+                                  String value = checkIntorDouble(
+                                      getFfwcDataModel!.rainfall ?? '');
+                                  sixAmController.text = value;
                                 } else {
                                   showDialog(
                                       context: context,
@@ -191,8 +197,9 @@ class _RainfallPageState extends State<RainfallPage> {
                                         if (info != null) {
                                           getFfwcDataModel =
                                               GetFfwcDataModel.fromJson(info);
-                                          sixAmController.text =
-                                              getFfwcDataModel!.rainfall ?? '';
+                                          String value = checkIntorDouble(
+                                              getFfwcDataModel!.rainfall ?? '');
+                                          sixAmController.text = value;
                                         } else {
                                           showDialog(
                                               context: context,
@@ -282,13 +289,15 @@ class _RainfallPageState extends State<RainfallPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (value == null || value.isEmpty) {
                                 return 'Please provide a value';
                               }
 
-                              if (!(pattern.hasMatch(value))) {
+                              if (!((pattern1.hasMatch(value)) ||
+                                  (pattern2.hasMatch(value)))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -327,11 +336,10 @@ class _RainfallPageState extends State<RainfallPage> {
                             borderRadius: BorderRadius.circular(8))),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        DataEntryService.ffwcRainfallDataEntry(
-                                selectedKeyword,
-                                datePickerController.text,
-                                sixAmController.text,
-                                '6:00')
+                        String checkValue =
+                            checkIntorDouble(sixAmController.text);
+                        DataEntryService.ffwcRainfallDataEntry(selectedKeyword,
+                                datePickerController.text, checkValue, '6:00')
                             .then((value) {
                           if (value != null) {
                             showDialog<String>(
@@ -368,11 +376,25 @@ class _RainfallPageState extends State<RainfallPage> {
                     child: Text(
                       'Submit',
                       style: GoogleFonts.poppins(
-                          fontSize: 15, fontWeight: FontWeight.w500),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ))
               ],
             ),
           )),
     );
+  }
+
+  String checkIntorDouble(String value) {
+    if (value.contains(".")) {
+      return value;
+    } else if (value == "") {
+      return "";
+    } else {
+      double convertedValue = double.parse(value);
+      String desiredValue = convertedValue.toStringAsFixed(1);
+      return desiredValue;
+    }
   }
 }

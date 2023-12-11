@@ -31,6 +31,9 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
     return Scaffold(
       backgroundColor: Color(0XFF64B5F6),
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Data Selection Page',

@@ -55,17 +55,31 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
     }
 
     super.didChangeDependencies();
-    sixAmController.text = stationInfoProvider.getFfwcDataModel.hr6 ?? '';
-    nineAmController.text = stationInfoProvider.getFfwcDataModel.hr9 ?? '';
-    twelvePmController.text = stationInfoProvider.getFfwcDataModel.hr12 ?? '';
-    fifteenPmController.text = stationInfoProvider.getFfwcDataModel.hr15 ?? '';
-    eighteenPmController.text = stationInfoProvider.getFfwcDataModel.hr18 ?? '';
+
+    String sixAmData =
+        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr6 ?? '');
+    sixAmController.text = sixAmData;
+    String nineAmData =
+        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr9 ?? '');
+    nineAmController.text = nineAmData;
+    String twelvePmData =
+        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr12 ?? '');
+    twelvePmController.text = twelvePmData;
+    String fifteenPmData =
+        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr15 ?? '');
+    fifteenPmController.text = fifteenPmData;
+    String eighteenPmData =
+        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr18 ?? '');
+    eighteenPmController.text = eighteenPmData;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Surface Water',
@@ -129,16 +143,22 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                 if (info != null) {
                                   getFfwcDataModel =
                                       GetFfwcDataModel.fromJson(info);
-                                  sixAmController.text =
-                                      getFfwcDataModel!.hr6 ?? '';
-                                  nineAmController.text =
-                                      getFfwcDataModel!.hr9 ?? '';
-                                  twelvePmController.text =
-                                      getFfwcDataModel!.hr12 ?? '';
-                                  fifteenPmController.text =
-                                      getFfwcDataModel!.hr15 ?? '';
-                                  eighteenPmController.text =
-                                      getFfwcDataModel!.hr18 ?? '';
+
+                                  String sixAmData = checkIntorDouble(
+                                      getFfwcDataModel!.hr6 ?? '');
+                                  sixAmController.text = sixAmData;
+                                  String nineAmData = checkIntorDouble(
+                                      getFfwcDataModel!.hr9 ?? '');
+                                  nineAmController.text = nineAmData;
+                                  String twelvePmData = checkIntorDouble(
+                                      getFfwcDataModel!.hr12 ?? '');
+                                  twelvePmController.text = twelvePmData;
+                                  String fifteenPmData = checkIntorDouble(
+                                      getFfwcDataModel!.hr15 ?? '');
+                                  fifteenPmController.text = fifteenPmData;
+                                  String eighteenPmData = checkIntorDouble(
+                                      getFfwcDataModel!.hr18 ?? '');
+                                  eighteenPmController.text = eighteenPmData;
                                 } else {
                                   showDialog(
                                       context: context,
@@ -204,16 +224,27 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                         if (info != null) {
                                           getFfwcDataModel =
                                               GetFfwcDataModel.fromJson(info);
-                                          sixAmController.text =
-                                              getFfwcDataModel!.hr6 ?? '';
-                                          nineAmController.text =
-                                              getFfwcDataModel!.hr9 ?? '';
+                                          String sixAmData = checkIntorDouble(
+                                              getFfwcDataModel!.hr6 ?? '');
+                                          sixAmController.text = sixAmData;
+                                          String nineAmData = checkIntorDouble(
+                                              getFfwcDataModel!.hr9 ?? '');
+                                          nineAmController.text = nineAmData;
+                                          String twelvePmData =
+                                              checkIntorDouble(
+                                                  getFfwcDataModel!.hr12 ?? '');
                                           twelvePmController.text =
-                                              getFfwcDataModel!.hr12 ?? '';
+                                              twelvePmData;
+                                          String fifteenPmData =
+                                              checkIntorDouble(
+                                                  getFfwcDataModel!.hr15 ?? '');
                                           fifteenPmController.text =
-                                              getFfwcDataModel!.hr15 ?? '';
+                                              fifteenPmData;
+                                          String eighteenPmData =
+                                              checkIntorDouble(
+                                                  getFfwcDataModel!.hr18 ?? '');
                                           eighteenPmController.text =
-                                              getFfwcDataModel!.hr18 ?? '';
+                                              eighteenPmData;
                                         } else {
                                           showDialog(
                                               context: context,
@@ -303,7 +334,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
                                   nineAmController.text.isEmpty &&
@@ -314,7 +346,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                               }
 
                               if (value!.isNotEmpty &&
-                                  !(pattern.hasMatch(value))) {
+                                  (!((pattern1.hasMatch(value)) ||
+                                      (pattern2.hasMatch(value))))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -355,7 +388,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
                                   nineAmController.text.isEmpty &&
@@ -366,7 +400,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                               }
 
                               if (value!.isNotEmpty &&
-                                  !(pattern.hasMatch(value!))) {
+                                  (!((pattern1.hasMatch(value)) ||
+                                      (pattern2.hasMatch(value))))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -407,7 +442,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
                                   nineAmController.text.isEmpty &&
@@ -418,7 +454,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                               }
 
                               if (value!.isNotEmpty &&
-                                  !(pattern.hasMatch(value!))) {
+                                  (!((pattern1.hasMatch(value)) ||
+                                      (pattern2.hasMatch(value))))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -459,7 +496,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
                                   nineAmController.text.isEmpty &&
@@ -470,7 +508,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                               }
 
                               if (value!.isNotEmpty &&
-                                  !(pattern.hasMatch(value))) {
+                                  (!((pattern1.hasMatch(value)) ||
+                                      (pattern2.hasMatch(value))))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -511,7 +550,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
                                   nineAmController.text.isEmpty &&
@@ -522,7 +562,8 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                               }
 
                               if (value!.isNotEmpty &&
-                                  !(pattern.hasMatch(value))) {
+                                  (!((pattern1.hasMatch(value)) ||
+                                      (pattern2.hasMatch(value))))) {
                                 return 'Please provide a valid value';
                               }
                             },
@@ -612,11 +653,25 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                     child: Text(
                       'Submit',
                       style: GoogleFonts.poppins(
-                          fontSize: 15, fontWeight: FontWeight.w500),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ))
               ],
             ),
           )),
     );
+  }
+
+  String checkIntorDouble(String value) {
+    if (value.contains(".")) {
+      return value;
+    } else if (value == "") {
+      return "";
+    } else {
+      double convertedValue = double.parse(value);
+      String desiredValue = convertedValue.toStringAsFixed(1);
+      return desiredValue;
+    }
   }
 }

@@ -16,6 +16,9 @@ class _DataRequestPageState extends State<DataRequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Data Request (Pending)',

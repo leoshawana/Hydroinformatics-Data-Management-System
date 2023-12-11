@@ -45,6 +45,9 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
         backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text(

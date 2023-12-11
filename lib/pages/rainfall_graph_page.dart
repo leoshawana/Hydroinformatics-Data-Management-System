@@ -45,6 +45,9 @@ class _RainfallGraphPageState extends State<RainfallGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         backgroundColor: Colors.blue,
         title: Text(
           'Rainfall Graph Page',
@@ -54,7 +57,7 @@ class _RainfallGraphPageState extends State<RainfallGraphPage> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.all(15),
+        margin: const EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
@@ -255,7 +258,7 @@ class _RainfallGraphPageState extends State<RainfallGraphPage> {
                                                         text: 'Date')),
                                                 primaryYAxis: NumericAxis(
                                                     title: AxisTitle(
-                                                        text: 'WL(mm)')),
+                                                        text: 'RF(mm)')),
                                                 series: <ChartSeries>[
                                                   // Renders line chart
                                                   BarSeries<RfData, String>(
@@ -303,4 +306,5 @@ class _RainfallGraphPageState extends State<RainfallGraphPage> {
       ),
     );
   }
+
 }
