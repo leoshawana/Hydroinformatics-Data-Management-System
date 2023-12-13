@@ -8,18 +8,21 @@ class LoginProvider extends ChangeNotifier {
   List<ServiceInfo> serviceInfo = [];
 
   Future<dynamic> getLoginInfo(String email, String password) async {
+
     final data = await LoginService.userLogin(email, password);
 
     if (data != null) {
       try {
         loginModel = LoginModel.fromJson(data);
+        print("11111111111");
         return data;
       } catch (e) {
+        print('22222222222');
         return data;
       }
     } else {
-
-      print('Something went wrong');
+      print("333333333333");
+      return data;
 
     }
   }

@@ -214,34 +214,47 @@ class _LoginPageState extends State<LoginPage> {
                                   .then((value) async {
                                 EasyLoading.dismiss();
 
-                                if (value['status'] == 'success') {
-                                  HelperMethod.setUserId(
-                                      value['user_id'].toString());
+                                if (value != null) {
+                                  if (value['status'] == 'success') {
+                                    HelperMethod.setUserId(
+                                        value['user_id'].toString());
 
-                                  HelperMethod.setUserName(value["name"]);
+                                    HelperMethod.setUserName(value["name"]);
 
-                                  HelperMethod.setAuthToken(
-                                      value['authorization']['token']);
-                                  ArtSweetAlert.show(
-                                      context: context,
-                                      artDialogArgs: ArtDialogArgs(
-                                          type: ArtSweetAlertType.success,
-                                          title: 'Congratulations !!',
-                                          text: value['message'].toString(),
-                                          confirmButtonText: 'Home',
-                                          onConfirm: () {
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).pushNamed(
-                                                BottomNavigationPage
-                                                    .bottomNavigationPage);
-                                          }));
+                                    HelperMethod.setAuthToken(
+                                        value['authorization']['token']);
+                                    ArtSweetAlert.show(
+                                        context: context,
+                                        artDialogArgs: ArtDialogArgs(
+                                            type: ArtSweetAlertType.success,
+                                            title: 'Congratulations !!',
+                                            text: value['message'].toString(),
+                                            confirmButtonText: 'Home',
+                                            onConfirm: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).pushNamed(
+                                                  BottomNavigationPage
+                                                      .bottomNavigationPage);
+                                            }));
+                                  } else if (value['status'] == 'error') {
+                                    ArtSweetAlert.show(
+                                        context: context,
+                                        artDialogArgs: ArtDialogArgs(
+                                            type: ArtSweetAlertType.question,
+                                            title: 'Sorry !!',
+                                            text: value['message'].toString(),
+                                            confirmButtonText: 'Ok',
+                                            onConfirm: () {
+                                              Navigator.of(context).pop();
+                                            }));
+                                  }
                                 } else {
                                   ArtSweetAlert.show(
                                       context: context,
                                       artDialogArgs: ArtDialogArgs(
-                                          type: ArtSweetAlertType.success,
-                                          title: 'Sorry !!',
-                                          text: value['message'].toString(),
+                                          type: ArtSweetAlertType.warning,
+                                          title: 'Oops!!!',
+                                          text: "Server problem.",
                                           confirmButtonText: 'Ok',
                                           onConfirm: () {
                                             Navigator.of(context).pop();
