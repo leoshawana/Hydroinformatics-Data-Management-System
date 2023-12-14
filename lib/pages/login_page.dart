@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Align(

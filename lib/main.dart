@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'HDMS',
+      title: 'eHIMS',
       theme: ThemeData(),
       navigatorKey: navigatorKey,
       initialRoute: SplashPage.splashPage,
