@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hydroinformatics_data_management_system/helpers/helper_method.dart';
+import 'package:hydroinformatics_data_management_system/pages/contact_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/login_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/services_page.dart';
 import 'package:hydroinformatics_data_management_system/services/logout_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,7 +53,7 @@ class _HomePageDrawerState extends State<HomePageDrawer> {
                   Align(
                       alignment: Alignment.center,
                       child: Text(
-                        HelperMethod.userName?? '',
+                        HelperMethod.userName ?? '',
                         style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.normal,
@@ -62,18 +64,24 @@ class _HomePageDrawerState extends State<HomePageDrawer> {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.home_outlined,
                         color: Colors.white,
                       ),
                       const SizedBox(
                         width: 15,
                       ),
-                      Text('Home',
-                          style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white))
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(ServicesPage.servicesPage);
+                        },
+                        child: Text('Home',
+                            style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white)),
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -88,11 +96,17 @@ class _HomePageDrawerState extends State<HomePageDrawer> {
                       const SizedBox(
                         width: 15,
                       ),
-                      Text('Contact Us',
-                          style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white))
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(ContactPage.contactPage);
+                        },
+                        child: Text('Contact Us',
+                            style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white)),
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -172,9 +186,17 @@ class _HomePageDrawerState extends State<HomePageDrawer> {
                           style: GoogleFonts.poppins(
                               fontSize: 15,
                               fontWeight: FontWeight.normal,
-                              color: Colors.white))
+                              color: Colors.white)),
                     ],
                   ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text('Powered by Leotech',
+                      style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white))
                 ]),
           ),
         ),

@@ -237,8 +237,8 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
                                                       child: Center(
                                                         child: Container(
                                                           padding:
-                                                              const EdgeInsets.all(
-                                                                  15),
+                                                              const EdgeInsets
+                                                                  .all(15),
                                                           width: 120,
                                                           decoration: BoxDecoration(
                                                               borderRadius:

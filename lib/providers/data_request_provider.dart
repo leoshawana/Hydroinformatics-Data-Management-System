@@ -48,5 +48,6 @@ class DataRequestProvider extends ChangeNotifier {
     dataRequestInfoModel!.dataRequestInfo!.forEach((element) {
       dataRequestList.add(element);
     });
+    notifyListeners();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hydroinformatics_data_management_system/custom/bottom_navigation.dart';
+import 'package:hydroinformatics_data_management_system/pages/contact_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_request_details_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_request_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_selection_page.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         DataRequestDetailsPage.dataRequestDetailsPage: (create) =>
             DataRequestDetailsPage(),
         RainfallGraphPage.rainfallGraphPage: (create) => RainfallGraphPage(),
+        ContactPage.contactPage: (create) => ContactPage(),
         SurfaceWaterGraphPage.surfaceWaterGraphPage: (create) =>
             SurfaceWaterGraphPage(),
       },

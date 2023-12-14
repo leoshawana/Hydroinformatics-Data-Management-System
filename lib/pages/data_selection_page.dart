@@ -31,12 +31,12 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
     return Scaffold(
       backgroundColor: Color(0XFF64B5F6),
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         backgroundColor: Colors.blue,
         title: Text(
-          'Data Selection Page',
+          'Process Selection Page',
           style: GoogleFonts.poppins(
               fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
         ),
