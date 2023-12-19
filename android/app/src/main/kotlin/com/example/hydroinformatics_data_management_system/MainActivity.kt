@@ -1,4 +1,4 @@
-package com.example.hydroinformatics_data_management_system
+package com.leotech.eihm
 
 import io.flutter.embedding.android.FlutterActivity
 

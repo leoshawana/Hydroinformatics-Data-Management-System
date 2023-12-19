@@ -63,8 +63,9 @@ class _DataRequestPageState extends State<DataRequestPage> {
                           return InkWell(
                             onTap: () {
                               Navigator.of(context).pushNamed(
-                                  DataRequestDetailsPage
-                                      .dataRequestDetailsPage);
+                                  DataRequestDetailsPage.dataRequestDetailsPage,
+                                  arguments: dataRequestProvider
+                                      .dataRequestList[index].reqMasId);
                             },
                             child: Card(
                                 color: Colors.lightBlue.withOpacity(.5),

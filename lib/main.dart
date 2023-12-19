@@ -15,6 +15,7 @@ import 'package:hydroinformatics_data_management_system/pages/splash_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_graph_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/surface_water_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/user_registration_page.dart';
+import 'package:hydroinformatics_data_management_system/providers/data_request_details_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/data_request_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/graph_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/login_provider.dart';
@@ -35,6 +36,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => UserDetailsProvider()),
     ChangeNotifierProvider(create: (context) => RegistrationStatusProvider()),
     ChangeNotifierProvider(create: (context) => DataRequestProvider()),
+    ChangeNotifierProvider(create: (context) => DataRequestDetailsProvider()),
   ], child: const MyApp()));
 }
 

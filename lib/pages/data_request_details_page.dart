@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hydroinformatics_data_management_system/providers/data_request_details_provider.dart';
+import 'package:provider/provider.dart';
 
 class DataRequestDetailsPage extends StatefulWidget {
   const DataRequestDetailsPage({super.key});
@@ -11,6 +13,27 @@ class DataRequestDetailsPage extends StatefulWidget {
 }
 
 class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
+  late String reqId;
+  bool callOnce = true;
+  late DataRequestDetailsProvider dataRequestDetailsProvider;
+
+  @override
+  void didChangeDependencies() {
+    reqId = ModalRoute.of(context)!.settings.arguments as String;
+    dataRequestDetailsProvider = Provider.of(context);
+
+    if (callOnce) {
+      dataRequestDetailsProvider
+          .getDataRequestDetails(reqId, context)
+          .then((value) {
+        dataRequestDetailsProvider.getDataRequestList();
+      });
+    }
+    callOnce = false;
+
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,49 +50,62 @@ class _DataRequestDetailsPageState extends State<DataRequestDetailsPage> {
         centerTitle: true,
       ),
       body: Container(
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.all(15),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Name: ${"Anik Kumar Saha"}',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black)),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text('Mobile No: ${"01752045464"}',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black)),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text('Email: ${"anikbubtcse@gmail.com"}',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black)),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text('Address: ${"Dhaka, Bangladesh"}',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black)),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text('Invoice No: ${"12305"}',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black)),
+                dataRequestDetailsProvider.dataRequestDetailsList.isEmpty
+                    ? Center(child: CircularProgressIndicator())
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              'Name: ${dataRequestDetailsProvider.dataRequestDetailsList[0].name}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                              'Mobile No: ${dataRequestDetailsProvider.dataRequestDetailsList[0].mobileNo}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                              'Email: ${dataRequestDetailsProvider.dataRequestDetailsList[0].email}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                              'Address: ${dataRequestDetailsProvider.dataRequestDetailsList[0].residenceAddress}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                              'Invoice No: ${dataRequestDetailsProvider.dataRequestDetailsList[0].invoiceNo}',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black)),
+                        ],
+                      ),
                 const SizedBox(
                   height: 20,
                 ),

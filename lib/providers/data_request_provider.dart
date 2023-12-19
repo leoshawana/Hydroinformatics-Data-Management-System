@@ -11,7 +11,7 @@ class DataRequestProvider extends ChangeNotifier {
   DataRequestInfoModel? dataRequestInfoModel;
   List<DataRequestInfo> dataRequestList = [];
 
-  Future<dynamic> getDataRequestInfo(context) async {
+  Future<void> getDataRequestInfo(context) async {
     final data = await DataRequestService.dataRequest();
 
     print("check");
