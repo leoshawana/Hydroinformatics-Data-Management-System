@@ -45,8 +45,8 @@ class _SurfaceWaterGraphPageState extends State<SurfaceWaterGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         backgroundColor: Colors.blue,
         title: Text(
@@ -233,12 +233,6 @@ class _SurfaceWaterGraphPageState extends State<SurfaceWaterGraphPage> {
                                 "WL",
                                 context)
                             .then((value) {
-                          graphProvider.surfaceWaterDataList.forEach((element) {
-                            print('element.rainfall: ${element.logDate}');
-                            print('element.rainfall: ${element.hr9}');
-                            print('keyword: ${selectedKeyword}');
-                          });
-
                           if (graphProvider.surfaceWaterDataList.isNotEmpty) {
                             showDialog<String>(
                                 context: context,
@@ -248,228 +242,359 @@ class _SurfaceWaterGraphPageState extends State<SurfaceWaterGraphPage> {
                                       content: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                      width: 20,
-                                                      height: 10,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 20,
+                                                        height: 10,
+                                                        color: Colors.blue,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text("6 am")
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 20,
+                                                        height: 10,
+                                                        color: Colors.green,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text("9 am")
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 20,
+                                                        height: 10,
+                                                        color: Colors.amber,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text("12 pm")
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 20,
+                                                        height: 10,
+                                                        color: Colors.purple,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text("15 pm")
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 20,
+                                                        height: 10,
+                                                        color: Colors.cyan,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text("18 pm")
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 40,
+                                              ),
+                                              SfCartesianChart(
+                                                  primaryXAxis: CategoryAxis(
+                                                      title: AxisTitle(
+                                                          text: 'Date')),
+                                                  primaryYAxis: NumericAxis(
+                                                      title: AxisTitle(
+                                                          text: 'WL(m)')),
+                                                  series: <ChartSeries>[
+                                                    // Renders line chart
+                                                    LineSeries<WlData, String>(
+                                                        dataSource: graphProvider
+                                                            .surfaceWaterDataList,
+                                                        xValueMapper:
+                                                            (WlData data, _) =>
+                                                                data.logDate,
+                                                        yValueMapper:
+                                                            (WlData data, _) {
+                                                          // Check if the value is empty or non-numeric
+                                                          if (data.hr6!
+                                                                  .isNotEmpty &&
+                                                              num.tryParse(data
+                                                                      .hr6!) !=
+                                                                  null) {
+                                                            // Parse the valid value to double
+                                                            return num.parse(
+                                                                data.hr6!);
+                                                          } else {
+                                                            // Return a default value or null to skip the data point
+                                                            return 0.0; // You can set this to a default value or null
+                                                          }
+                                                        },
+                                                        name: 'hr6',
+                                                        color: Colors.blue),
+
+                                                    LineSeries<WlData, String>(
+                                                        dataSource: graphProvider
+                                                            .surfaceWaterDataList,
+                                                        xValueMapper:
+                                                            (WlData data, _) =>
+                                                                data.logDate,
+                                                        yValueMapper:
+                                                            (WlData data, _) {
+                                                          // Check if the value is empty or non-numeric
+                                                          if (data.hr9!
+                                                                  .isNotEmpty &&
+                                                              num.tryParse(data
+                                                                      .hr9!) !=
+                                                                  null) {
+                                                            // Parse the valid value to double
+                                                            return num.parse(
+                                                                data.hr9!);
+                                                          } else {
+                                                            // Return a default value or null to skip the data point
+                                                            return 0.0; // You can set this to a default value or null
+                                                          }
+                                                        },
+                                                        name: 'hr9',
+                                                        color: Colors.green),
+
+                                                    LineSeries<WlData, String>(
+                                                        dataSource: graphProvider
+                                                            .surfaceWaterDataList,
+                                                        xValueMapper:
+                                                            (WlData data, _) =>
+                                                                data.logDate,
+                                                        yValueMapper:
+                                                            (WlData data, _) {
+                                                          // Check if the value is empty or non-numeric
+                                                          if (data.hr12!
+                                                                  .isNotEmpty &&
+                                                              num.tryParse(data
+                                                                      .hr12!) !=
+                                                                  null) {
+                                                            // Parse the valid value to double
+                                                            return num.parse(
+                                                                data.hr12!);
+                                                          } else {
+                                                            // Return a default value or null to skip the data point
+                                                            return 0.0; // You can set this to a default value or null
+                                                          }
+                                                        },
+                                                        name: 'hr12',
+                                                        color: Colors.amber),
+
+                                                    LineSeries<WlData, String>(
+                                                        dataSource: graphProvider
+                                                            .surfaceWaterDataList,
+                                                        xValueMapper:
+                                                            (WlData data, _) =>
+                                                                data.logDate,
+                                                        yValueMapper:
+                                                            (WlData data, _) {
+                                                          // Check if the value is empty or non-numeric
+                                                          if (data.hr15!
+                                                                  .isNotEmpty &&
+                                                              num.tryParse(data
+                                                                      .hr15!) !=
+                                                                  null) {
+                                                            // Parse the valid value to double
+                                                            return num.parse(
+                                                                data.hr15!);
+                                                          } else {
+                                                            // Return a default value or null to skip the data point
+                                                            return 0.0; // You can set this to a default value or null
+                                                          }
+                                                        },
+                                                        name: 'hr15',
+                                                        color: Colors.purple),
+
+                                                    LineSeries<WlData, String>(
+                                                        dataSource: graphProvider
+                                                            .surfaceWaterDataList,
+                                                        xValueMapper:
+                                                            (WlData data, _) =>
+                                                                data.logDate,
+                                                        yValueMapper:
+                                                            (WlData data, _) {
+                                                          // Check if the value is empty or non-numeric
+                                                          if (data.hr18!
+                                                                  .isNotEmpty &&
+                                                              num.tryParse(data
+                                                                      .hr18!) !=
+                                                                  null) {
+                                                            // Parse the valid value to double
+                                                            return num.parse(
+                                                                data.hr18!);
+                                                          } else {
+                                                            // Return a default value or null to skip the data point
+                                                            return 0.0; // You can set this to a default value or null
+                                                          }
+                                                        },
+                                                        name: 'hr18',
+                                                        color: Colors.cyan),
+                                                  ]),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    elevation: 5,
+                                                    backgroundColor:
+                                                        Colors.blue,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8))),
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                child: Text('OK',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.white)),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: graphProvider
+                                                      .surfaceWaterDataList
+                                                      .length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Card(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      elevation: 5,
                                                       color: Colors.blue,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text("6 am")
-                                                  ],
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Date: ${graphProvider.surfaceWaterDataList[index].logDate}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            Text(
+                                                              "6 am: ${graphProvider.surfaceWaterDataList[index].hr6}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 3,
+                                                            ),
+                                                            Text(
+                                                              "9 am: ${graphProvider.surfaceWaterDataList[index].hr9}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 3,
+                                                            ),
+                                                            Text(
+                                                              "12 pm: ${graphProvider.surfaceWaterDataList[index].hr12}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 3,
+                                                            ),
+                                                            Text(
+                                                              "15 pm: ${graphProvider.surfaceWaterDataList[index].hr15}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 3,
+                                                            ),
+                                                            Text(
+                                                              "18 pm: ${graphProvider.surfaceWaterDataList[index].hr18}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                      width: 20,
-                                                      height: 10,
-                                                      color: Colors.green,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text("9 am")
-                                                  ],
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                      width: 20,
-                                                      height: 10,
-                                                      color: Colors.amber,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text("12 pm")
-                                                  ],
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                      width: 20,
-                                                      height: 10,
-                                                      color: Colors.purple,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text("15 pm")
-                                                  ],
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                      width: 20,
-                                                      height: 10,
-                                                      color: Colors.cyan,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text("18 pm")
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 40,
-                                            ),
-                                            SfCartesianChart(
-                                                primaryXAxis: CategoryAxis(
-                                                    title: AxisTitle(
-                                                        text: 'Date')),
-                                                primaryYAxis: NumericAxis(
-                                                    title: AxisTitle(
-                                                        text: 'WL(m)')),
-                                                series: <ChartSeries>[
-                                                  // Renders line chart
-                                                  LineSeries<WlData, String>(
-                                                      dataSource: graphProvider
-                                                          .surfaceWaterDataList,
-                                                      xValueMapper:
-                                                          (WlData data, _) =>
-                                                              data.logDate,
-                                                      yValueMapper:
-                                                          (WlData data, _) {
-                                                        // Check if the value is empty or non-numeric
-                                                        if (data.hr6!
-                                                                .isNotEmpty &&
-                                                            num.tryParse(data
-                                                                    .hr6!) !=
-                                                                null) {
-                                                          // Parse the valid value to double
-                                                          return num.parse(
-                                                              data.hr6!);
-                                                        } else {
-                                                          // Return a default value or null to skip the data point
-                                                          return 0.0; // You can set this to a default value or null
-                                                        }
-                                                      },
-                                                      name: 'hr6',
-                                                      color: Colors.blue),
-
-                                                  LineSeries<WlData, String>(
-                                                      dataSource: graphProvider
-                                                          .surfaceWaterDataList,
-                                                      xValueMapper:
-                                                          (WlData data, _) =>
-                                                              data.logDate,
-                                                      yValueMapper:
-                                                          (WlData data, _) {
-                                                        // Check if the value is empty or non-numeric
-                                                        if (data.hr9!
-                                                                .isNotEmpty &&
-                                                            num.tryParse(data
-                                                                    .hr9!) !=
-                                                                null) {
-                                                          // Parse the valid value to double
-                                                          return num.parse(
-                                                              data.hr9!);
-                                                        } else {
-                                                          // Return a default value or null to skip the data point
-                                                          return 0.0; // You can set this to a default value or null
-                                                        }
-                                                      },
-                                                      name: 'hr9',
-                                                      color: Colors.green),
-
-                                                  LineSeries<WlData, String>(
-                                                      dataSource: graphProvider
-                                                          .surfaceWaterDataList,
-                                                      xValueMapper:
-                                                          (WlData data, _) =>
-                                                              data.logDate,
-                                                      yValueMapper:
-                                                          (WlData data, _) {
-                                                        // Check if the value is empty or non-numeric
-                                                        if (data.hr12!
-                                                                .isNotEmpty &&
-                                                            num.tryParse(data
-                                                                    .hr12!) !=
-                                                                null) {
-                                                          // Parse the valid value to double
-                                                          return num.parse(
-                                                              data.hr12!);
-                                                        } else {
-                                                          // Return a default value or null to skip the data point
-                                                          return 0.0; // You can set this to a default value or null
-                                                        }
-                                                      },
-                                                      name: 'hr12',
-                                                      color: Colors.amber),
-
-                                                  LineSeries<WlData, String>(
-                                                      dataSource: graphProvider
-                                                          .surfaceWaterDataList,
-                                                      xValueMapper:
-                                                          (WlData data, _) =>
-                                                              data.logDate,
-                                                      yValueMapper:
-                                                          (WlData data, _) {
-                                                        // Check if the value is empty or non-numeric
-                                                        if (data.hr15!
-                                                                .isNotEmpty &&
-                                                            num.tryParse(data
-                                                                    .hr15!) !=
-                                                                null) {
-                                                          // Parse the valid value to double
-                                                          return num.parse(
-                                                              data.hr15!);
-                                                        } else {
-                                                          // Return a default value or null to skip the data point
-                                                          return 0.0; // You can set this to a default value or null
-                                                        }
-                                                      },
-                                                      name: 'hr15',
-                                                      color: Colors.purple),
-
-                                                  LineSeries<WlData, String>(
-                                                      dataSource: graphProvider
-                                                          .surfaceWaterDataList,
-                                                      xValueMapper:
-                                                          (WlData data, _) =>
-                                                              data.logDate,
-                                                      yValueMapper:
-                                                          (WlData data, _) {
-                                                        // Check if the value is empty or non-numeric
-                                                        if (data.hr18!
-                                                                .isNotEmpty &&
-                                                            num.tryParse(data
-                                                                    .hr18!) !=
-                                                                null) {
-                                                          // Parse the valid value to double
-                                                          return num.parse(
-                                                              data.hr18!);
-                                                        } else {
-                                                          // Return a default value or null to skip the data point
-                                                          return 0.0; // You can set this to a default value or null
-                                                        }
-                                                      },
-                                                      name: 'hr18',
-                                                      color: Colors.cyan),
-                                                ]),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context, 'OK'),
-                                              child: const Text('OK'),
-                                            ),
-                                          ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ));

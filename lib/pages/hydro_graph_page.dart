@@ -45,8 +45,8 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white, //change your color here
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
         backgroundColor: Colors.blue,
         centerTitle: true,
@@ -245,40 +245,118 @@ class _HydroGraphPageState extends State<HydroGraphPage> {
                                       content: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 40,
-                                            ),
-                                            SfCartesianChart(
-                                                primaryXAxis: CategoryAxis(
-                                                    title: AxisTitle(
-                                                        text: 'Date')),
-                                                primaryYAxis: NumericAxis(
-                                                    title: AxisTitle(
-                                                        text: 'WL(m)')),
-                                                series: <ChartSeries>[
-                                                  // Renders line chart
-                                                  LineSeries<Data, String>(
-                                                      dataSource: graphProvider
-                                                          .hydroDataList,
-                                                      xValueMapper:
-                                                          (Data data, _) =>
-                                                              data.logDate,
-                                                      yValueMapper: (Data data,
-                                                              _) =>
-                                                          num.parse(
-                                                              data.waterLvl!))
-                                                ]),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context, 'OK'),
-                                              child: const Text('OK'),
-                                            ),
-                                          ],
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 40,
+                                              ),
+                                              SfCartesianChart(
+                                                  primaryXAxis: CategoryAxis(
+                                                      title: AxisTitle(
+                                                          text: 'Date')),
+                                                  primaryYAxis: NumericAxis(
+                                                      title: AxisTitle(
+                                                          text: 'WL(m)')),
+                                                  series: <ChartSeries>[
+                                                    // Renders line chart
+                                                    LineSeries<Data, String>(
+                                                        dataSource:
+                                                            graphProvider
+                                                                .hydroDataList,
+                                                        xValueMapper:
+                                                            (Data data, _) =>
+                                                                data.logDate,
+                                                        yValueMapper:
+                                                            (Data data, _) =>
+                                                                num.parse(data
+                                                                    .waterLvl!))
+                                                  ]),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    elevation: 5,
+                                                    backgroundColor:
+                                                        Colors.blue,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8))),
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                child: Text('OK',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.white)),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: graphProvider
+                                                      .hydroDataList.length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return Card(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      elevation: 5,
+                                                      color: Colors.blue,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              "Date: ${graphProvider.hydroDataList[index].logDate}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            Text(
+                                                              "Value: ${graphProvider.hydroDataList[index].waterLvl}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ));
