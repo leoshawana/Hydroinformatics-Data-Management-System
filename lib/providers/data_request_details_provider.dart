@@ -8,20 +8,17 @@ import '../main.dart';
 
 class DataRequestDetailsProvider extends ChangeNotifier {
   DataRequestDetailsModel? dataRequestDetailsModel;
-  List<DataRequestInfo> dataRequestDetailsList = [];
+
+  List<RequestedDataInfo> requestedDataInfoList = [];
 
   Future<void> getDataRequestDetails(id, context) async {
     final data = await DataRequestDetailsService.dataRequestDetails(id);
 
-    print("check");
-
     if (data != null) {
       if (data["status"] == "success") {
         dataRequestDetailsModel = DataRequestDetailsModel.fromJson(data);
+        notifyListeners();
       }
-
-      print(
-          'dataRequestDetailsModel!.status: ${dataRequestDetailsModel!.status}');
     } else {
       showDialog(
           barrierDismissible: false,
@@ -47,10 +44,9 @@ class DataRequestDetailsProvider extends ChangeNotifier {
   }
 
   void getDataRequestList() {
-    dataRequestDetailsList.clear();
-    dataRequestDetailsModel!.dataRequestInfo!.forEach((element) {
-      dataRequestDetailsList.add(element);
+    requestedDataInfoList.clear();
+    dataRequestDetailsModel!.requestedDataInfo!.forEach((element) {
+      requestedDataInfoList.add(element);
     });
-    notifyListeners();
   }
 }

@@ -98,7 +98,9 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                         Text('Data Entry',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.poppins(
-                                fontSize: 14, fontWeight: FontWeight.w400))
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white))
                       ],
                     ),
                   ),
@@ -140,7 +142,9 @@ class _DataSelectionPageState extends State<DataSelectionPage> {
                         Text('Data List',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.poppins(
-                                fontSize: 14, fontWeight: FontWeight.w400))
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white))
                       ],
                     ),
                   ),

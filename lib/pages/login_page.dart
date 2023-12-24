@@ -100,19 +100,21 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 30,
                       ),
-                      Center(
-                        child: Text('Login',
-                            style: GoogleFonts.poppins(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white)),
-                      ),
+                      // Center(
+                      //   child: Text('Login',
+                      //       style: GoogleFonts.poppins(
+                      //           fontSize: 25,
+                      //           fontWeight: FontWeight.w500,
+                      //           color: Colors.white)),
+                      // ),
                       const SizedBox(
                         height: 15,
                       ),
                       Text('User Name',
                           style: GoogleFonts.poppins(
-                              fontSize: 15, fontWeight: FontWeight.w400)),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white)),
                       const SizedBox(
                         height: 15,
                       ),
@@ -152,7 +154,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text('Password',
                               style: GoogleFonts.poppins(
-                                  fontSize: 15, fontWeight: FontWeight.w400)),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white)),
                         ],
                       ),
                       const SizedBox(
