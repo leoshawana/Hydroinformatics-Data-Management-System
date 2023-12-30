@@ -13,12 +13,10 @@ class DataRequestProvider extends ChangeNotifier {
 
   Future<void> getDataRequestInfo(context) async {
     final data = await DataRequestService.dataRequest();
-
-    print("check");
-
     if (data != null) {
       if (data["status"] == "success") {
         dataRequestInfoModel = DataRequestInfoModel.fromJson(data);
+        notifyListeners();
       }
     } else {
       showDialog(

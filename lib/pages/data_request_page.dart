@@ -20,7 +20,7 @@ class _DataRequestPageState extends State<DataRequestPage> {
 
   @override
   void didChangeDependencies() {
-    dataRequestProvider = Provider.of(context);
+    dataRequestProvider = Provider.of(context, listen: true);
 
     if (callOnce) {
       dataRequestProvider.getDataRequestInfo(context).then((value) {

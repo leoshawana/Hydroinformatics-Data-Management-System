@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class HelperMethod {
   static String? authToken;
@@ -49,5 +50,11 @@ class HelperMethod {
     }
 
     return status;
+  }
+
+  static String getFormattedDate(String date) {
+    String formattedDate = DateFormat('dd-MM-yyyy').format(DateTime.parse(date));
+
+    return formattedDate;
   }
 }
