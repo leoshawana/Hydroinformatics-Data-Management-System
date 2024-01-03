@@ -5,6 +5,7 @@ import 'package:hydroinformatics_data_management_system/custom/drawer.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_request_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_selection_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/user_registration_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/water_level_availability_page.dart';
 import 'package:hydroinformatics_data_management_system/providers/login_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/station_info_provider.dart';
 import 'package:provider/provider.dart';
@@ -117,6 +118,16 @@ class _ServicesPageState extends State<ServicesPage> {
                           EasyLoading.dismiss();
                           Navigator.of(context)
                               .pushNamed(DataRequestPage.dataRequestPage);
+                        });
+                      }
+                      if (loginProvider.serviceInfo[index].data! == "SW") {
+                        stationInfoProvider
+                            .getStationInfo(
+                            loginProvider.serviceInfo[index].data!, context)
+                            .then((value) {
+                          EasyLoading.dismiss();
+                          Navigator.of(context)
+                              .pushNamed(WaterLevelAvailabilityPage.waterLevelAvailabilityPage);
                         });
                       }
                     },
