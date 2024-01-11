@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hydroinformatics_data_management_system/providers/data_availability_provider.dart';
+import 'package:provider/provider.dart';
 
 class DataAvailabilityListPage extends StatefulWidget {
   const DataAvailabilityListPage({super.key});
@@ -12,6 +14,15 @@ class DataAvailabilityListPage extends StatefulWidget {
 }
 
 class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
+  late DataAvailabilityProvider dataAvailabilityProvider;
+
+  @override
+  void didChangeDependencies() {
+    dataAvailabilityProvider = Provider.of(context, listen: true);
+
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +32,7 @@ class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
         ),
         backgroundColor: Colors.blue,
         title: Text(
-          'Data Availability List Page',
+          'Available Data',
           style: GoogleFonts.poppins(
               fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
         ),
@@ -35,7 +46,8 @@ class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount:
+                      dataAvailabilityProvider.dataAvailabilityList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                       shape: RoundedRectangleBorder(
@@ -45,7 +57,7 @@ class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
                       child: Column(
                         children: [
                           Text(
-                            "Station Name : ",
+                            "Station Name : ${dataAvailabilityProvider.dataAvailabilityList[index].stationName}",
                             style: GoogleFonts.poppins(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -55,7 +67,7 @@ class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
                             height: 5,
                           ),
                           Text(
-                            "Year : ",
+                            "Year : ${dataAvailabilityProvider.dataAvailabilityList[index].yearVal}",
                             style: GoogleFonts.poppins(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -100,7 +112,7 @@ class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(5),
                                       child: Text(
-                                        "6:00",
+                                        "January",
                                         style: GoogleFonts.poppins(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
@@ -112,7 +124,329 @@ class _DataAvailabilityListPageState extends State<DataAvailabilityListPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(5),
                                       child: Text(
-                                        "Test",
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .jan! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "February",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .feb! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "March",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .mar! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "April",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .apr! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "May",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .may! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "June",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .jun! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "July",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .jul! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "August",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .aug! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "September",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .sep! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "October",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .oct! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "November",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .nov! ??
+                                            '',
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        "December",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        dataAvailabilityProvider
+                                                .dataAvailabilityList[index]
+                                                .dec! ??
+                                            '',
                                         style: GoogleFonts.poppins(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,

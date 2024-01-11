@@ -46,7 +46,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
   @override
   void didChangeDependencies() {
     stationInfoProvider = Provider.of(context, listen: true);
-    if (callOnce == false) {
+    if (callOnce == false && stationInfoProvider.stationInfo.isNotEmpty) {
       stationInfoProvider.getStationName();
       selectedStation = stationInfoProvider.stationName[0];
       selectedKeyword = stationInfoProvider.getStationKeyword(selectedStation);
@@ -56,28 +56,34 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
 
     super.didChangeDependencies();
 
-    String sixAmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr6 ?? '');
-    sixAmController.text = sixAmData;
-    String nineAmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr9 ?? '');
-    nineAmController.text = nineAmData;
-    String twelvePmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr12 ?? '');
-    twelvePmController.text = twelvePmData;
-    String fifteenPmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr15 ?? '');
-    fifteenPmController.text = fifteenPmData;
-    String eighteenPmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr18 ?? '');
-    eighteenPmController.text = eighteenPmData;
+    if (stationInfoProvider.stationInfo.isNotEmpty) {
+
+      String sixAmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr6 ?? '');
+      sixAmController.text = sixAmData;
+      String nineAmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr9 ?? '');
+      nineAmController.text = nineAmData;
+      String twelvePmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr12 ?? '');
+      twelvePmController.text = twelvePmData;
+      String fifteenPmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr15 ?? '');
+      fifteenPmController.text = fifteenPmData;
+      String eighteenPmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr18 ?? '');
+      eighteenPmController.text = eighteenPmData;
+
+    }
+
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         backgroundColor: Colors.blue,
@@ -91,7 +97,13 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
       body: Container(
           margin: const EdgeInsets.all(20),
           child: SingleChildScrollView(
-            child: Column(
+            child: stationInfoProvider.stationInfo.isEmpty
+                ? Text(
+              'You have no assigned station ...',
+              style: GoogleFonts.poppins(
+                  fontSize: 14, fontWeight: FontWeight.w500),
+            )
+                : Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

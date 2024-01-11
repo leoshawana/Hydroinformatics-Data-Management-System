@@ -27,13 +27,13 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
     userRegistrationProvider = Provider.of(context, listen: true);
     registrationStatusProvider = Provider.of(context, listen: true);
     userDetailsProvider = Provider.of(context);
+
     if (callOnce) {
       userRegistrationProvider.getRegistrationInfo(context).then((value) {
         userRegistrationProvider.getPendingRegistrationInfo();
       });
       callOnce = false;
     }
-
     super.didChangeDependencies();
   }
 
@@ -41,7 +41,7 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
         ),
         backgroundColor: Colors.blue,
@@ -58,7 +58,12 @@ class _UserRegistrationPageState extends State<UserRegistrationPage> {
           children: [
             Expanded(
               child: userRegistrationProvider.dataList.isEmpty
-                  ? const Center(child: CircularProgressIndicator())
+                  ? Center(
+                      child: Text(
+                      'No pending registration request .....',
+                      style: GoogleFonts.poppins(
+                          fontSize: 14, fontWeight: FontWeight.w500),
+                    ))
                   : ListView.builder(
                       itemCount: userRegistrationProvider.dataList.length,
                       itemBuilder: (context, index) {
