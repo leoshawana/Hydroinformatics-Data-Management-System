@@ -305,7 +305,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Station: ${selectedStation}',
+                      'Station: $selectedStation',
                       style: GoogleFonts.poppins(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -346,7 +346,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -408,7 +408,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -470,7 +470,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -532,7 +532,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -594,7 +594,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&

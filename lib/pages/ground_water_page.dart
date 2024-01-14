@@ -340,7 +340,7 @@ class _GroundWaterPageState extends State<GroundWaterPage> {
                                       child: TextFormField(
                                     validator: (value) {
                                       RegExp pattern1 =
-                                          RegExp(r'^\d{1,3}\.\d{1,3}$');
+                                          RegExp(r'^\d{0,3}\.\d{1,3}$');
                                       RegExp pattern2 = RegExp(r'^\d+$');
 
                                       if (value == null || value.isEmpty) {

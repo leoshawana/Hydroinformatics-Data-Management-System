@@ -286,7 +286,7 @@ class _RainfallPageState extends State<RainfallPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Station: ${selectedStation}',
+                              'Station: $selectedStation',
                               style: GoogleFonts.poppins(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -329,7 +329,7 @@ class _RainfallPageState extends State<RainfallPage> {
                                     child: TextFormField(
                                       validator: (value) {
                                         RegExp pattern1 =
-                                            RegExp(r'^\d{1,3}\.\d{1,3}$');
+                                            RegExp(r'^\d{0,3}\.\d{1,3}$');
                                         RegExp pattern2 = RegExp(r'^\d+$');
 
                                         if (value == null || value.isEmpty) {
