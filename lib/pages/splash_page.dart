@@ -18,17 +18,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 5)).then((value) {
-
       Navigator.of(context).pushReplacementNamed(LoginPage.loginPage);
-
-      // HelperMethod.getStudentId().then((value) {
-      //   print("Value: ${value}");
-      //   if (value != null) {
-      //     Navigator.of(context).pushReplacementNamed(ServicesPage.servicesPage);
-      //   } else {
-      //     Navigator.of(context).pushReplacementNamed(LoginPage.loginPage);
-      //   }
-      // });
     });
 
     super.initState();

@@ -16,7 +16,6 @@ class StationInfoProvider extends ChangeNotifier {
   late GetFfwcDataModel getFfwcDataModel;
 
   Future<void> getStationInfo(String value, context) async {
-    print('Value: ${value}');
     stationInfo.clear();
     dynamic data = await StationInfoService.stationInfo(value);
     if (data != null) {
@@ -25,7 +24,7 @@ class StationInfoProvider extends ChangeNotifier {
         stationInfo.add(element);
       });
 
-      if (value == 'GW') {
+      if (value == 'GW' && stationInfo.length != 0) {
         dynamic info = await FetchStationDataService.fetchHydroData(
             stationInfo[0].keyword,
             DateFormat('dd-MM-yyyy').format(DateTime.now()));
@@ -38,7 +37,7 @@ class StationInfoProvider extends ChangeNotifier {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: Text('Something went wrong'),
+                  title: const Text('Something went wrong'),
                   actions: [
                     TextButton(
                         onPressed: () {
@@ -51,7 +50,8 @@ class StationInfoProvider extends ChangeNotifier {
         }
       }
 
-      if (value == 'RF' || value == 'WL') {
+      if (((value == 'RF' || value == 'WL') && stationInfo.isNotEmpty)) {
+        print('stationInfo.length: ${stationInfo.length}');
         dynamic info = await FetchStationDataService.fetchFfwcData(
             stationInfo[0].keyword,
             DateFormat('dd-MM-yyyy').format(DateTime.now()));
@@ -63,7 +63,7 @@ class StationInfoProvider extends ChangeNotifier {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: Text('Something went wrong'),
+                  title: const Text('Something went wrong'),
                   actions: [
                     TextButton(
                         onPressed: () {

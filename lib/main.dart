@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hydroinformatics_data_management_system/custom/bottom_navigation.dart';
 import 'package:hydroinformatics_data_management_system/pages/contact_page.dart';
+import 'package:hydroinformatics_data_management_system/pages/data_availability_list_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_request_details_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_request_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/data_selection_page.dart';
@@ -17,12 +18,14 @@ import 'package:hydroinformatics_data_management_system/pages/surface_water_page
 import 'package:hydroinformatics_data_management_system/pages/user_registration_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/water_level_availability_search_page.dart';
 import 'package:hydroinformatics_data_management_system/pages/water_level_availability_page.dart';
+import 'package:hydroinformatics_data_management_system/providers/data_availability_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/data_request_details_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/data_request_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/graph_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/login_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/registration_status_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/station_info_provider.dart';
+import 'package:hydroinformatics_data_management_system/providers/subdivision_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/user_details_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/user_registration_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/water_level_availability_provider.dart';
@@ -40,6 +43,8 @@ void main() {
     ChangeNotifierProvider(create: (context) => RegistrationStatusProvider()),
     ChangeNotifierProvider(create: (context) => DataRequestProvider()),
     ChangeNotifierProvider(create: (context) => DataRequestDetailsProvider()),
+    ChangeNotifierProvider(create: (context) => SubdivisionProvider()),
+    ChangeNotifierProvider(create: (context) => DataAvailabilityProvider()),
     ChangeNotifierProvider(
         create: (context) => WaterLevelAvailabilityProvider()),
   ], child: const MyApp()));
@@ -81,6 +86,8 @@ class MyApp extends StatelessWidget {
             SurfaceWaterGraphPage(),
         WaterLevelAvailabilityPage.waterLevelAvailabilityPage: (create) =>
             WaterLevelAvailabilityPage(),
+        DataAvailabilityListPage.dataAvailabilityListPage: (create) =>
+            DataAvailabilityListPage(),
       },
     );
   }

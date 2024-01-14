@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hydroinformatics_data_management_system/pages/water_level_availability_search_page.dart';
+import 'package:hydroinformatics_data_management_system/providers/subdivision_provider.dart';
 import 'package:hydroinformatics_data_management_system/providers/water_level_availability_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,11 +19,14 @@ class WaterLevelAvailabilityPage extends StatefulWidget {
 class _WaterLevelAvailabilityPageState
     extends State<WaterLevelAvailabilityPage> {
   late WaterLevelAvailabilityProvider waterLevelAvailabilityProvider;
+  late SubdivisionProvider subdivisionProvider;
   bool callOnce = true;
 
   @override
   void didChangeDependencies() {
     waterLevelAvailabilityProvider = Provider.of(context, listen: true);
+    subdivisionProvider = Provider.of(context);
+
     if (callOnce) {
       waterLevelAvailabilityProvider.getWaterLevelAvailability(context);
       callOnce = false;
@@ -45,7 +51,7 @@ class _WaterLevelAvailabilityPageState
         centerTitle: true,
       ),
       body: waterLevelAvailabilityProvider.surfaceWaterList.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Container(
               margin: EdgeInsets.all(10),
               child: SingleChildScrollView(
@@ -60,7 +66,20 @@ class _WaterLevelAvailabilityPageState
                           .surfaceWaterList.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            EasyLoading.show();
+                            subdivisionProvider
+                                .getSubdivision(
+                                    context,
+                                    waterLevelAvailabilityProvider
+                                        .surfaceWaterList[index].serialNo!)
+                                .then((value) {
+                              EasyLoading.dismiss();
+                              Navigator.of(context).pushNamed(
+                                  WaterLevelAvailabilitySearchPage
+                                      .waterLevelAvailabilitySearchPage);
+                            });
+                          },
                           child: Card(
                             elevation: 5,
                             shape: RoundedRectangleBorder(

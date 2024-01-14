@@ -15,18 +15,16 @@ class DataRequestPage extends StatefulWidget {
 }
 
 class _DataRequestPageState extends State<DataRequestPage> {
-  late DataRequestProvider dataRequestProvider;
   bool callOnce = true;
+  late DataRequestProvider dataRequestProvider;
 
   @override
   void didChangeDependencies() {
     dataRequestProvider = Provider.of(context, listen: true);
-
     if (callOnce) {
       dataRequestProvider.getDataRequestInfo(context).then((value) {
         dataRequestProvider.getDataRequestList();
       });
-
       callOnce = false;
     }
 
@@ -49,15 +47,21 @@ class _DataRequestPageState extends State<DataRequestPage> {
         centerTitle: true,
       ),
       body: Container(
+          height: MediaQuery.of(context).size.height,
           margin: EdgeInsets.all(15),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 dataRequestProvider.dataRequestList.isEmpty
-                    ? Center(child: CircularProgressIndicator())
+                    ? Center(
+                        child: Text(
+                        'No pending data request .....',
+                        style: GoogleFonts.poppins(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ))
                     : ListView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: dataRequestProvider.dataRequestList.length,
                         itemBuilder: (context, index) {
                           return InkWell(

@@ -46,7 +46,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
   @override
   void didChangeDependencies() {
     stationInfoProvider = Provider.of(context, listen: true);
-    if (callOnce == false) {
+    if (callOnce == false && stationInfoProvider.stationInfo.isNotEmpty) {
       stationInfoProvider.getStationName();
       selectedStation = stationInfoProvider.stationName[0];
       selectedKeyword = stationInfoProvider.getStationKeyword(selectedStation);
@@ -56,28 +56,34 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
 
     super.didChangeDependencies();
 
-    String sixAmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr6 ?? '');
-    sixAmController.text = sixAmData;
-    String nineAmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr9 ?? '');
-    nineAmController.text = nineAmData;
-    String twelvePmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr12 ?? '');
-    twelvePmController.text = twelvePmData;
-    String fifteenPmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr15 ?? '');
-    fifteenPmController.text = fifteenPmData;
-    String eighteenPmData =
-        checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr18 ?? '');
-    eighteenPmController.text = eighteenPmData;
+    if (stationInfoProvider.stationInfo.isNotEmpty) {
+
+      String sixAmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr6 ?? '');
+      sixAmController.text = sixAmData;
+      String nineAmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr9 ?? '');
+      nineAmController.text = nineAmData;
+      String twelvePmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr12 ?? '');
+      twelvePmController.text = twelvePmData;
+      String fifteenPmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr15 ?? '');
+      fifteenPmController.text = fifteenPmData;
+      String eighteenPmData =
+      checkIntorDouble(stationInfoProvider.getFfwcDataModel.hr18 ?? '');
+      eighteenPmController.text = eighteenPmData;
+
+    }
+
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         backgroundColor: Colors.blue,
@@ -91,7 +97,13 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
       body: Container(
           margin: const EdgeInsets.all(20),
           child: SingleChildScrollView(
-            child: Column(
+            child: stationInfoProvider.stationInfo.isEmpty
+                ? Text(
+              'You have no assigned station ...',
+              style: GoogleFonts.poppins(
+                  fontSize: 14, fontWeight: FontWeight.w500),
+            )
+                : Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -293,7 +305,7 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Station: ${selectedStation}',
+                      'Station: $selectedStation',
                       style: GoogleFonts.poppins(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -324,17 +336,17 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                       Row(
                         children: [
                           Text(
-                            "6:00 am",
+                            "06:00",
                             style: GoogleFonts.poppins(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 10,
                           ),
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -369,7 +381,15 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12))),
                             ),
-                          ))
+                          )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '(m)',
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          )
                         ],
                       ),
                       const SizedBox(
@@ -378,17 +398,17 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                       Row(
                         children: [
                           Text(
-                            "9:00 am",
+                            "09:00",
                             style: GoogleFonts.poppins(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 10,
                           ),
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -423,7 +443,15 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12))),
                             ),
-                          ))
+                          )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '(m)',
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          )
                         ],
                       ),
                       const SizedBox(
@@ -432,17 +460,17 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                       Row(
                         children: [
                           Text(
-                            "12:00 pm",
+                            "12:00",
                             style: GoogleFonts.poppins(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 10,
                           ),
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -477,7 +505,15 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12))),
                             ),
-                          ))
+                          )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '(m)',
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          )
                         ],
                       ),
                       const SizedBox(
@@ -486,17 +522,17 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                       Row(
                         children: [
                           Text(
-                            "15:00 pm",
+                            "15:00",
                             style: GoogleFonts.poppins(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 10,
                           ),
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -531,7 +567,15 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12))),
                             ),
-                          ))
+                          )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '(m)',
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          )
                         ],
                       ),
                       const SizedBox(
@@ -540,17 +584,17 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                       Row(
                         children: [
                           Text(
-                            "18:00 pm",
+                            "18:00",
                             style: GoogleFonts.poppins(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 10,
                           ),
                           Expanded(
                               child: TextFormField(
                             validator: (value) {
-                              RegExp pattern1 = RegExp(r'^\d{1,3}\.\d{1,3}$');
+                              RegExp pattern1 = RegExp(r'^\d{0,3}\.\d{1,3}$');
                               RegExp pattern2 = RegExp(r'^\d+$');
 
                               if (sixAmController.text.isEmpty &&
@@ -585,7 +629,15 @@ class _SurfaceWaterPageState extends State<SurfaceWaterPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12))),
                             ),
-                          ))
+                          )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '(m)',
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          )
                         ],
                       ),
                       const SizedBox(
